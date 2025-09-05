@@ -1,7 +1,7 @@
 <!--
  * @Author: NanNan
  * @Date: 2025-09-04 15:04:31
- * @LastEditTime: 2025-09-05 02:57:08
+ * @LastEditTime: 2025-09-06 00:26:49
  * @Description: 
 -->
 <template>
@@ -13,14 +13,4 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-class Animal {
-  static num = 42;
-
-  constructor() {
-    // ...
-  }
-}
-
-console.log(Animal.num); // Jack
-</script>
+<script lang="ts" setup></script>

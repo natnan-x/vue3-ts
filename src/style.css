@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+.anticon {
+  vertical-align: 0px !important;
+}
 
 /* 原配 */
 /* :root {

@@ -1,18 +1,13 @@
 <!--
  * @Author: NanNan
  * @Date: 2025-09-04 14:50:51
- * @LastEditTime: 2025-09-06 03:14:09
+ * @LastEditTime: 2025-09-06 02:08:33
  * @Description: 
 -->
 <template>
   <div class="min-h-screen flex flex-col h-screen">
     <div class="h-[64px] shadow-md flex px-6 items-center relative z-10">
-      <span
-        class="text-[20px] transition-all duration-300 overflow-hidden whitespace-nowrap"
-        :class="state.collapsed ? 'w-0 opacity-0' : 'w-[240px] opacity-100'"
-      >
-        NatNan
-      </span>
+      <span class="w-[240px] text-[20px]">NatNan</span>
       <div>
         <Button type="primary" @click="toggleCollapsed">
           <MenuUnfoldOutlined v-if="state.collapsed" />
@@ -22,10 +17,7 @@
     </div>
     <!-- 侧边栏 -->
     <div class="flex-1 flex">
-      <div
-        :class="state.collapsed ? 'w-20' : 'w-64'"
-        class="shadow-md transition-all duration-300"
-      >
+      <div style="width: 256px" class="shadow-md">
         <Menu
           v-model:openKeys="state.openKeys"
           v-model:selectedKeys="state.selectedKeys"
