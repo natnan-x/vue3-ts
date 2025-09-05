@@ -1,7 +1,7 @@
 /*
  * @Author: NanNan
  * @Date: 2025-09-04 14:50:51
- * @LastEditTime: 2025-09-06 01:36:04
+ * @LastEditTime: 2025-09-06 04:50:43
  * @Description:
  */
 import { defineConfig } from 'vite';
@@ -9,12 +9,14 @@ import tailwindcss from '@tailwindcss/vite';
 import Components from 'unplugin-vue-components/vite';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import vue from '@vitejs/plugin-vue';
+import svgLoader from 'vite-svg-loader';
 import checker from 'vite-plugin-checker';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    svgLoader(),
     tailwindcss(),
     checker({
       // typescript: true,
