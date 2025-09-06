@@ -42,7 +42,11 @@ const items: MenuProps['items'] = [
     key: '/demo',
     icon: () => h(FolderOutlined),
     label: 'Demo Page',
-    children: [{ key: '/demo/g2', label: 'G2' }],
+    children: [
+      { key: '/demo/g2', label: 'G2' },
+      { key: '/demo/form', label: 'form' },
+      { key: '/demo/ts', label: 'ts' },
+    ],
   },
 ];
 
