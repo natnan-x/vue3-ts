@@ -1,11 +1,6 @@
-<!--
- * @Author: NanNan
- * @Date: 2025-09-04 14:50:51
- * @LastEditTime: 2025-09-06 05:13:29
- * @Description: 
--->
 <template>
-  <div class="min-h-screen flex flex-col h-screen">
+  <div class="flex flex-col h-screen">
+    <!-- 顶部导航 -->
     <div
       class="h-[64px] shadow-md flex px-6 items-center relative z-10 justify-between"
     >
@@ -21,18 +16,17 @@
         </span>
       </div>
       <div class="flex justify-end items-center">
-        <a-switch
-          v-model:checked="state.theme_value"
-          checked-children="dark"
-          un-checked-children="light"
-        />
         <a-divider type="vertical" style="margin: 0 20px" />
-        <div class="flex items-center">
-          <MailOutlined style="color: #4a5565" />
-          <span class="ml-2 text-sm font-bold text-gray-600">
-            NATNAN0405@163.COM
-          </span>
-        </div>
+        <a
+          type="link"
+          target="_blank"
+          :href="mailtoHref"
+          rel="noopener"
+          class="flex items-center text-sm font-bold text-gray-600"
+        >
+          <MailOutlined style="color: #4a5565" class="mr-2" />
+          NATNAN0405@163.COM
+        </a>
         <a-divider type="vertical" style="margin: 0 20px" />
         <div class="flex items-center">
           <a-avatar
@@ -43,22 +37,15 @@
         </div>
       </div>
     </div>
-    <!-- 侧边栏 -->
-    <div class="flex-1 flex">
+
+    <!-- 主体 -->
+    <div class="flex-1 flex overflow-hidden">
+      <!-- 侧边栏 -->
       <div
         :class="state.collapsed ? 'w-20' : 'w-64'"
         class="shadow-md transition-all duration-300 flex flex-col pt-1"
       >
-        <a-menu
-          v-model:openKeys="state.openKeys"
-          v-model:selectedKeys="state.selectedKeys"
-          mode="inline"
-          theme="light"
-          :inline-collapsed="state.collapsed"
-          :items="items"
-          style="border: 0px"
-          class="flex-1"
-        />
+        <SidebarMenu :collapsed="state.collapsed" />
         <div class="flex-shrink-0 pb-3 text-center">
           <a-divider style="margin: 12px 0" />
           <a-button type="primary" @click="toggleCollapsed">
@@ -67,95 +54,42 @@
           </a-button>
         </div>
       </div>
-      <main class="flex-1 p-4">
+
+      <!-- 内容区域 -->
+      <main class="flex-1 overflow-auto" style="background: #f1f4f6">
         <RouterView />
       </main>
     </div>
-    <!-- 内容部分 -->
   </div>
 </template>
 
 <script lang="ts" setup>
-// 如果需要全局逻辑或者组合式 API，可在这里写
+import { reactive, computed } from 'vue';
+import { RouterView } from 'vue-router';
+import SidebarMenu from './components/layout/SidebarMenu.vue';
 import LogoIcon from './assets/logo.svg?component';
-
-import { reactive, watch, h } from 'vue';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  AreaChartOutlined,
   MailOutlined,
-  DesktopOutlined,
-  AppstoreOutlined,
 } from '@ant-design/icons-vue';
+
 const state = reactive({
   collapsed: false,
-  selectedKeys: ['1'],
-  openKeys: ['sub1'],
-  preOpenKeys: ['sub1'],
-  theme_value: false,
 });
-const items = reactive([
-  {
-    key: '1',
-    icon: () => h(AreaChartOutlined),
-    label: '工作台',
-    title: '工作台',
-  },
-  {
-    key: '2',
-    icon: () => h(DesktopOutlined),
-    label: '任务',
-    title: '任务',
-  },
-  {
-    key: 'sub2',
-    icon: () => h(AppstoreOutlined),
-    label: 'Navigation Two',
-    title: 'Navigation Two',
-    children: [
-      {
-        key: '9',
-        label: 'Option 9',
-        title: 'Option 9',
-      },
-      {
-        key: '10',
-        label: 'Option 10',
-        title: 'Option 10',
-      },
-      {
-        key: 'sub3',
-        label: 'Submenu',
-        title: 'Submenu',
-        children: [
-          {
-            key: '11',
-            label: 'Option 11',
-            title: 'Option 11',
-          },
-          {
-            key: '12',
-            label: 'Option 12',
-            title: 'Option 12',
-          },
-        ],
-      },
-    ],
-  },
-]);
-watch(
-  () => state.openKeys,
-  (_val, oldVal) => {
-    state.preOpenKeys = oldVal;
-  }
+
+const to = 'natnan0405@163.com';
+const subject = '您好，我是xxx';
+const body = '请描述你的问题...';
+
+const mailtoHref = computed(
+  () =>
+    `mailto:${to}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`
 );
+
 const toggleCollapsed = () => {
   state.collapsed = !state.collapsed;
-  state.openKeys = state.collapsed ? [] : state.preOpenKeys;
 };
 </script>
-
-<style scoped>
-/* 可选自定义样式 */
-</style>

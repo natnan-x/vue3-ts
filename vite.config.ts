@@ -1,7 +1,7 @@
 /*
  * @Author: NanNan
  * @Date: 2025-09-04 14:50:51
- * @LastEditTime: 2025-09-06 04:50:43
+ * @LastEditTime: 2025-09-07 01:49:33
  * @Description:
  */
 import { defineConfig } from 'vite';
@@ -11,6 +11,7 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import vue from '@vitejs/plugin-vue';
 import svgLoader from 'vite-svg-loader';
 import checker from 'vite-plugin-checker';
+import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -31,4 +32,9 @@ export default defineConfig({
       ],
     }),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 });
